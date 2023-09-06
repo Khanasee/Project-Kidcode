@@ -1,0 +1,339 @@
+ <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="indexjk.php" class="brand-link">
+      <img src="../img/2.png" alt="kid'd code Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">KID'D CODE</span>
+    </a>
+
+
+
+
+
+    <!-- Sidebar ตำแหน่ง -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="indexjk.php" class="d-block">เจ้าของสาขา</a>
+        </div>
+      </div>
+
+
+      
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               <li class="nav-item">
+               <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
+                    <option selected="selected">เลือกสาขา</option>
+                    <option>A</option>
+                    <option>C</option>
+                    <option>T</option>
+                  </select>
+                  <button type="button" class="btn btn-info btn-flat col-12 col-sm-12">Go!</button>
+                </div>
+                </li>     
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                นักเรียน
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addstudent.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>เพิ่มรายชื่อนักเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="detailstudent.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายละเอียดนักเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="projectstudent.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ผลงานนักเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="check.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>เช็คชื่อ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="conn.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>สรุปผลการเข้าเรียน</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                สาขา
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="major.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>สาขา</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="tech.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>อาจารย์ผู้สอน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="class.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ตารางสอน</p>
+                </a>
+              </li>
+            </ul>
+            <li class="nav-item">
+                <a href="money.php" class="nav-link">
+                    <i class="nav-icon fas fa-coins"></i>
+                  <p>
+                    การเงิิน
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="edit.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-edit"></i>
+                  <p>
+                    แก้ไขข้อมูลส่วนตัว
+                  </p>
+                </a>
+              </li>
+            <li class="btn-danger">
+                <a href="#" class="nav-link ">
+                    <i class="fas fa-power-off" style="color: white;"> </i>
+                  <p style="color: white;">
+                   LOGOUT
+                  </p>
+                </a>
+              </li> 
+          </li>        
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+
+
+
+
+<?php 
+  session_start();
+  require('../condb.php');
+  $sql = ("SELECT * FROM branch");
+  $result = mysqli_query($conn, $sql);
+  $sql_subject = ("SELECT * FROM subject");
+  $result_subject = mysqli_query($conn , $sql_subject);
+   $errors = array();
+   include('errors.php'); 
+
+  if (!isset($_SESSION['username'])) {
+    $_SESSION['error'] = "You must log in first";
+    header('location: login.php');
+}
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header('location: login.php');
+}
+?>
+
+
+
+
+
+<?php
+  require('../condb.php');
+  $subject = ("SELECT * FROM subject");
+  $result_subject = mysqli_query($conn, $subject);
+
+  $major = ("SELECT * FROM branch");
+  $result_major = mysqli_query($conn, $major);
+
+  $member = ("SELECT * FROm member WHERE member_rank = 's' or member_rank = 't'");
+  $result_member = mysqli_query($conn, $member);
+  
+  session_start();
+   $errors = array();
+   include('errors.php'); 
+   $show = ("SELECT *  FROM teacher_schedule AS d1
+            INNER JOIN member AS d2
+            ON  d1.teacher_schedule_name = d2.member_id
+            INNER JOIN branch AS d3
+            ON d1.teacher_schedule_branch=d3.branch_id
+            INNER JOIN subject AS d4
+            ON d1.teacher_schedule_subject=d4.subject_id");
+          $result_show = mysqli_query($conn, $show);
+?>
+
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="indexjk.php" class="brand-link">
+      <img src="../img/2.png" alt="kid'd code Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">KID'D CODE</span>
+    </a>
+
+
+
+
+
+    <!-- Sidebar ตำแหน่ง -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="indexjk.php" class="d-block">เจ้าของสาขา</a>
+        </div>
+      </div>
+
+
+      
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+               <li class="nav-item">
+               <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <select class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" style="width: 100%;">
+                    <option selected="selected">เลือกสาขา</option>
+                    <option>A</option>
+                    <option>C</option>
+                    <option>T</option>
+                  </select>
+                  <button type="button" class="btn btn-info btn-flat col-12 col-sm-12">Go!</button>
+                </div>
+                </li>     
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                นักเรียน
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="addstudent.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>เพิ่มรายชื่อนักเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="detailstudent.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>รายละเอียดนักเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="projectstudent.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ผลงานนักเรียน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="check.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>เช็คชื่อ</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="conn.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>สรุปผลการเข้าเรียน</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                สาขา
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="major.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>สาขา</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="tech.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>อาจารย์ผู้สอน</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="class.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>ตารางสอน</p>
+                </a>
+              </li>
+            </ul>
+            <li class="nav-item">
+                <a href="money.php" class="nav-link">
+                    <i class="nav-icon fas fa-coins"></i>
+                  <p>
+                    การเงิิน
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="edit.php" class="nav-link">
+                    <i class="nav-icon fas fa-user-edit"></i>
+                  <p>
+                    แก้ไขข้อมูลส่วนตัว
+                  </p>
+                </a>
+              </li>
+            <li class="btn-danger">
+                <a href="#" class="nav-link ">
+                    <i class="fas fa-power-off" style="color: white;"> </i>
+                  <p style="color: white;">
+                   LOGOUT
+                  </p>
+                </a>
+              </li> 
+          </li>        
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

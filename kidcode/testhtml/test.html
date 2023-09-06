@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleaa.css">
+    <link rel="stylesheet" href="cleave.js">
+</head>
+<body>
+    <div class="container">
+
+        <input class="input-custom" placeholder="Custom delimiter & blocks" />
+    </div>
+<script>
+    var cleaveCustom = new Cleave('.input-custom', {
+    blocks: [3, 3, 3, 3],
+    delimiter: '-',
+});
+</script>
+<script src="cleave.css"></script>
+<script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+*{
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+
+    width: 130vw;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+figure{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 100px 0 ;
+    margin-top: 250px;
+    align-items: center;
+}
+.co{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+figure:hover .co{
+    filter: blur(2px);
+}
+figure:after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+figure:nth-child(1):after{
+    background: linear-gradient(
+        to top,#ee0979,#ff6a00
+    );
+    
+}
+figure:nth-child(2):after{
+    background: linear-gradient(
+        to right,#ee0979,#ff6a00
+    );
+}
+figure:nth-child(3):after{
+    background: linear-gradient(
+        to left,#ee0979,#ff6a00
+    );
+}
+figure:nth-child(4):after{
+    background: linear-gradient(
+        to bottom,#ee0979,#ff6a00
+    );
+}
+figure:hover:after{
+    opacity: 0.6;
+}
+figcaption{
+    color: white;
+    width: 80%;
+    margin-left: 10%;
+    position: absolute;
+    padding: 0px 0px 150px 0px;
+    text-align: center;
+    border-bottom: 3px solid #ffffff;
+    z-index: 3;
+    transform: translateY(50px) ;
+    opacity: 0;
+    transition: 0.3s;
+}
+figcaption h6{
+    font-size: 32px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+
+}
+figcaption p{
+    font-size: 24px;
+    font-weight: 300;
+    margin-top: 5px;
+
+}
+figure:hover figcaption{
+    transform:translateY(0);
+    opacity: 1;
+}
+a{
+    text-decoration: none;
+}
+*/
+
+footer{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+footer .wave{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 198px;
+    background: url("http://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg");
+    background-size: 1600px 198px;
+}
+footer .wave.water1{
+    animation: animate-wave-1 10s linear infinite;
+    z-index: 1000;
+    opacity: 1;
+    animation-delay: 0s;
+    bottom: 0;
+}
+footer.wave.water2{
+    animation: animate-wave-2 5s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+}
+footer .wave.water3{
+    animation: animate-wave-3 10s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: -2s;
+    bottom: 15px;
+}
+footer .wave.water4{
+    animation: animate-wave-4 2s linear infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    bottom: 20px;
+}
+@keyframes animate-wave-1{ 0% { background-position-x: 0;}
+                            100%{ background-position-x: 1600px;}
+}
+@keyframes animate-wave-2{ 0% { background-position-x: 0;}
+                            100%{ background-position-x: -1600px;}
+}
+@keyframes animate-wave-3{ 0% { background-position-x: 0;}
+                            100%{ background-position-x: 1600px;}
+}
+@keyframes animate-wave-4{ 0% { background-position-x: 0;}
+                            100%{ background-position-x: -1600px;}
+}
+
+
+.week1{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.week{
+    height: 400px;
+}
+.but{
+    height: 400px;
+    transition: all;
+}
+.but:hover{
+    transform: scale(1.3);
+}
